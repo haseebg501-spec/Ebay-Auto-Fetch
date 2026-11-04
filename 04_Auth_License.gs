@@ -14,7 +14,7 @@
  */
 function callAuthRelayServer(payload) {
   const relayUrl = EBAY_CONFIG.AUTH_RELAY_URL;
-  if (!relayUrl || relayUrl.includes('PASTE_YOUR_AUTH_RELAY_URL_HERE')) {
+  if (!relayUrl || relayUrl.includes('PASTE_YOUR_AUTH_RELAY_URL_HERE') || relayUrl.includes('LINK OF YOUR MASTERSHEET WHERE YOU ADD USERS')) {
     throw new Error('AUTH_RELAY_URL is not configured. Please paste your Master Relay Web App URL in 01_Config_Menu.gs.');
   }
 
@@ -264,8 +264,8 @@ function showSubscriptionStatusModal() {
         .label { font-weight: 600; color: #6b7280; }
         .val { font-weight: 700; color: #111827; }
         .badge { background: ${statusColor}; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-        .alert-box { background: ${info.valid ? '#E8F8F0' : '#FEE2E2'}; border: 1px solid ${info.valid ? '#A7F3D0' : '#FCA5A5'}; color: ${info.valid ? '#065F46' : '#991B1B'}; padding: 12px; border-radius: 8px; font-size: 12px; line-height: 1.4; margin-bottom: 14px; }
-        .btn-change { display: inline-block; width: 100%; text-align: center; background: #f3f4f6; color: #374151; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #d1d5db; cursor: pointer; text-decoration: none; }
+        .alert-box { background: ${info.valid ? '#E8F8F0' : '#FEE2E2'}; border: 1px solid ${info.valid ? '#A7F3D0' : '#FCA5A5'}; color: ${info.valid ? '#065F46' : '#991B1B'}; padding: 12px; border-radius: 6px; margin-bottom: 14px; font-size: 12px; }
+        .btn-change { display: inline-block; width: 100%; text-align: center; background: #f3f4f6; color: #374151; padding: 8px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid #e5e7eb; cursor: pointer; }
         .btn-change:hover { background: #e5e7eb; }
       </style>
     </head>
@@ -331,7 +331,7 @@ function openAuthorizationUrl() {
         input[type="text"], input[type="email"], select { width: 100%; padding: 9px 12px; border-radius: 6px; border: 1px solid #d1d5db; font-size: 13.5px; color: #111827; background: #f9fafb; outline: none; }
         input:focus, select:focus { border-color: #0F9D58; box-shadow: 0 0 0 2px rgba(15,157,88,0.2); background: #ffffff; }
         .btn-container { text-align: center; margin-top: 16px; margin-bottom: 12px; }
-        .btn { display: inline-block; width: 100%; padding: 11px 20px; background: #0F9D58; color: #ffffff; font-weight: 700; font-size: 13.5px; border-radius: 6px; border: none; cursor: pointer; transition: background 0.15s ease; box-shadow: 0 2px 6px rgba(15,157,88,0.25); }
+        .btn { display: inline-block; width: 100%; padding: 11px 20px; background: #0F9D58; color: #ffffff; font-weight: 700; font-size: 13.5px; border-radius: 6px; border: none; cursor: pointer; }
         .btn:hover { background: #0b8043; }
         .btn:disabled { background: #9ca3af; cursor: not-allowed; }
         .hint-box { background: #f3f4f6; border: 1px solid #e5e7eb; padding: 10px 12px; border-radius: 6px; font-size: 11.5px; color: #4b5563; line-height: 1.4; }
@@ -429,7 +429,7 @@ function openAuthorizationUrl() {
                   statusBox.innerHTML = '⚠️ <b>Note:</b> ' + (res.warning || 'Server note') + '<br><br><b>eBay login tab opened!</b> Sign in on eBay, copy the redirect URL, and run Step 2.';
                 } else {
                   statusBox.className = 'status-box status-success';
-                  statusBox.innerHTML = '✅ <b>Registration Successful!</b><br>Account registered in Master Database.<br><br><b>eBay sign-in tab opened!</b> Click "Agree and Continue", then copy the URL and run <b>Step 2</b> from the menu.';
+                  statusBox.innerHTML = '✅ <b>Registration Successful!</b><br>Account registered in Master Database.<br><br><b>eBay sign-in tab opened!</b> Click "Agree and Continue", then copy the redirect URL and run Step 2.';
                 }
               } else {
                 statusBox.className = 'status-box status-error';
@@ -568,4 +568,3 @@ function promptExchangeAuthCode() {
     ui.alert('❌ Connection Failed', err.toString(), ui.ButtonSet.OK);
   }
 }
-
